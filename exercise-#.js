@@ -56,8 +56,8 @@ Exercise 3: Joining up the data, part 1
 */
 var query2 = `SELECT a.id, a.email, GROUP_CONCAT(ab.name) AS addressbooks 
 FROM AddressBook ab 
-LEFT JOIN Account a 
-ON a.id = ab.accountId 
+RIGHT JOIN Account a 
+ON a.id = ab.accountId
 GROUP BY a.id;
 `; 
 
@@ -69,8 +69,8 @@ connection.query(query2, function(err, result) {
     //console.log(JSON.parse(JSON.stringify(result)));
     result.forEach(function(account) {
       console.log('#' + account.id + ': ' + account.email);
-      console.log(account.addressbooks);
-      //(account.name === null ) ? console.log('--no addressbook--') : console.log(account.name);
+      // console.log(account.addressbooks);
+      (account.addressbooks === null ) ? console.log('--no addressbook--') : console.log(account.addressbooks);
     });
   }
   // console.log(result);
